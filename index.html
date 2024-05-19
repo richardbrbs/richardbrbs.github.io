@@ -40,7 +40,7 @@
         function updateCountdown() {
             const now = Date.now();
             const remainingSeconds = totalSeconds - Math.floor((now - countdownStartDate) / 1000);
-            document.getElementById('countdown').innerText = remainingSeconds > 0 ? remainingSeconds : "Time's up!";
+            document.getElementById('countdown').innerText = remainingSeconds > 0 ? remainingSeconds : "_";
         }
 
         setInterval(updateCountdown, 1000);
