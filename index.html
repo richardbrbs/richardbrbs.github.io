@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> </title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+        }
+        #countdown {
+            font-size: 2em;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div id="countdown"></div>
+    <script>
+        // Base64 encoded values
+        const encodedTotalSeconds = 'MjU5MjI0ODgzMg==';
+        const encodedStartDate = 'MTk4NC0wNC0zMFQxNzo1NDowMFo=';
+
+        // Decode Base64
+        function decodeBase64(base64) {
+            return decodeURIComponent(atob(base64).split('').map(c =>
+                '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2)
+            ).join(''));
+        }
+
+        // Decode the values
+        const totalSeconds = parseInt(decodeBase64(encodedTotalSeconds));
+        const countdownStartDate = new Date(decodeBase64(encodedStartDate)).getTime();
+
+        function updateCountdown() {
+            const now = Date.now();
+            const remainingSeconds = totalSeconds - Math.floor((now - countdownStartDate) / 1000);
+            document.getElementById('countdown').innerText = remainingSeconds > 0 ? remainingSeconds : "Time's up!";
+        }
+
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+    </script>
+</body>
+</html>
